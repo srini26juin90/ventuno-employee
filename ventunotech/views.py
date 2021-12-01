@@ -2,6 +2,7 @@ from django.shortcuts import render
 from ventunotech.models import AddEmployee
 from django.contrib import messages
 
+
 def addEmployee(request):
     if request.method == 'POST':
         if request.POST.get('emp_name') and request.POST.get('emp_email') and request.POST.get('emp_age') and request.POST.get('emp_designation'):

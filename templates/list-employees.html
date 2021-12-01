@@ -1,1 +1,24 @@
 <h1>List all employees</h1>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Designation</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for stud in employee %}  
+          <tr>
+            <td>{{stud.emp_id}}</td>
+            <td>{{stud.emp_name}}</td>
+            <td>{{stud.emp_email}}</td>
+            <td>{{stud.emp_designation}}</td>
+          </tr>
+          {% endfor %} 
+        </tbody>
+    </table>	
+    </div>

@@ -2,7 +2,11 @@ from django.shortcuts import render
 from ventunotech.models import AddEmployee
 from django.contrib import messages
 from django.http import HttpResponse
+from ratelimit.decorators import ratelimit
+import pickle
+import json
 
+@ratelimit(key='ip', rate='5/m', method=['GET', 'POST'])
 def addEmployee(request):
     if request.method == 'POST':
         if request.POST.get('emp_name') and request.POST.get('emp_email') and request.POST.get('emp_age') and request.POST.get('emp_designation'):
@@ -21,16 +25,16 @@ def addEmployee(request):
 # from django.http import HttpResponse
 # # Create your views here.
 def listEmployee(request):
-    view = "template_two"
-    # return render(request, "employee.html", {'name': view})
-    return render(request, 'list-employees.html')
+    data = AddEmployee.objects.all()
+    employee = {
+        "employeeData": data
+    }
+    print(employee)
+    
+    return render(request, 'list-employees.html', employee)
 
 def deleteEmployee(request):
-    view = "template_two"
-    # return render(request, "employee.html", {'name': view})
     return render(request, 'delete-employee.html')
 
 def updateEmployee(request):
-    view = "template_two"
-    # return render(request, "employee.html", {'name': view})
     return render(request, 'update-employee.html')           
